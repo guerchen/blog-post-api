@@ -15,4 +15,12 @@ py -m pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-Yay! This must work! If it doens't, get in touch! We can troubleshoot together. 
+## How to run (option 2)
+
+You can also use the dockerfile to run this repo. To do this, just execute:
+```
+docker build -t myimage .
+docker run -d --name mycontainer -p 80:80 myimage
+```
+
+Yay! This must work! If it doesn't, get in touch! We can troubleshoot together. 
