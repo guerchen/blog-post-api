@@ -23,4 +23,6 @@ docker build -t myimage .
 docker run -d --name mycontainer -p 80:80 myimage
 ```
 
-Yay! This must work! If it doesn't, get in touch! We can troubleshoot together. 
+Yay! This must work! If it doesn't, get in touch! We can troubleshoot together.
+
+This API is deployed at https://api-jpezawplgq-rj.a.run.app/, check https://api-jpezawplgq-rj.a.run.app/docs for its Swagger.
