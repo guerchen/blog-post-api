@@ -12,7 +12,7 @@ py -m pip install -r requirements.txt
 2. Create a MongoDB database and place your credentials in mongo_setup.py
 3. Then, run this command to start the API server locally:
 ```
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ## How to run (option 2)
