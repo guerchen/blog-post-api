@@ -29,7 +29,6 @@ class Post(BaseModel):
     date: date
     content: str
 
-
 @app.get("/posts")
 def read_all():
     posts = list(db.blog_posts.find().sort("date", pymongo.DESCENDING))
@@ -40,22 +39,28 @@ def read_all():
 
 @app.get("/posts/{item_id}")
 def read_item(item_id: str):
-    query = db.blog_posts.find_one({"_id" :ObjectId(item_id)})
-    id = str(query["_id"])
-    del query["_id"]
-    return {"id": id, "data": query}
+    try:
+        query = db.blog_posts.find_one({"_id" :ObjectId(item_id)})
+        id = str(query["_id"])
+        del query["_id"]
+        return {"id": id, "data": query}
+    except:
+        raise HTTPException(status_code=404, detail="Not found")
 
 @app.put("/posts/{item_id}")
 def update_item(item_id: str, post: Post, authorization: str = Header(default=None)):
     if authorization != api_key:
         raise HTTPException(status_code=401, detail="Unauthorized")
-    db.blog_posts.update_one(
-        {"_id" :ObjectId(item_id)},
-        {
-            "$set": jsonable_encoder(post)
-        }
-    )
-    return {"updated": True}
+    try:
+        db.blog_posts.update_one(
+            {"_id" :ObjectId(item_id)},
+            {
+                "$set": jsonable_encoder(post)
+            }
+        )
+        return {"updated": True}
+    except:
+        raise HTTPException(status_code=404, detail="Not found")
 
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
 def create_item(post: Post, authorization: str = Header(default=None)):
@@ -69,5 +74,8 @@ def create_item(post: Post, authorization: str = Header(default=None)):
 def delete_item(item_id: str, authorization: str = Header(default=None)):
     if authorization != api_key:
         raise HTTPException(status_code=401, detail="Unauthorized")
-    db.blog_posts.delete_one({"_id":ObjectId(item_id)})
-    return {"deleted":True}
+    try:
+        db.blog_posts.delete_one({"_id":ObjectId(item_id)})
+        return {"deleted":True}
+    except:
+        raise HTTPException(status_code=404, detail="Not found")
