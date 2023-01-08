@@ -1,13 +1,28 @@
-from app.mongo_setup import db, api_key
+from mongo_setup import db, api_key
 import pymongo
 from fastapi import FastAPI, status, Header, HTTPException
 from pydantic import BaseModel
 from datetime import date
 from bson.objectid import ObjectId
 from fastapi.encoders import jsonable_encoder
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:3000",
+    "https://guerchenzon.com"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Post(BaseModel):
     title: str
