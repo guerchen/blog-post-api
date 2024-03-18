@@ -1,0 +1,7 @@
+# created by virtualenv automatically
+
+.env
+
+/blog_api
+
+/app/__pycache__/
