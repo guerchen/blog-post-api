@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class Post(BaseModel):
     title: str
@@ -12,11 +12,11 @@ class VisitData(BaseModel):
     page: str
     date: datetime
     ip: str
-    hostname: Optional[str]
-    city: Optional[str]
-    region: Optional[str]
-    country: Optional[str]
-    loc: Optional[str]
-    org: Optional[str]
-    postal: Optional[str]
-    timezone: Optional[str]
+    hostname: Optional[str] = Field(default=None)
+    city: Optional[str] = Field(default=None)
+    region: Optional[str] = Field(default=None)
+    country: Optional[str] = Field(default=None)
+    loc: Optional[str] = Field(default=None)
+    org: Optional[str] = Field(default=None)
+    postal: Optional[str] = Field(default=None)
+    timezone: Optional[str] = Field(default=None)
