@@ -17,11 +17,11 @@ class MySiteVisits(SQLModel, table=True):
     page: str
     date: datetime
     ip: str
-    hostname: str
-    city: str
-    region: str
-    country: str
-    loc: str
-    org: str
-    postal: str
-    timezone: str
+    hostname: Optional[str] = Field(default=None)
+    city: Optional[str] = Field(default=None)
+    region: Optional[str] = Field(default=None)
+    country: Optional[str] = Field(default=None)
+    loc: Optional[str] = Field(default=None)
+    org: Optional[str] = Field(default=None)
+    postal: Optional[str] = Field(default=None)
+    timezone: Optional[str] = Field(default=None)
