@@ -20,3 +20,5 @@ class VisitData(BaseModel):
     org: Optional[str] = Field(default=None)
     postal: Optional[str] = Field(default=None)
     timezone: Optional[str] = Field(default=None)
+    platform: Optional[str] = Field(default=None)
+    user_agent: Optional[str] = Field(default=None)
