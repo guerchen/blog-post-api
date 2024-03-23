@@ -20,5 +20,6 @@ def save_visit_to_database(visit_data: VisitData):
 def register_site_interaction(visit_data: VisitData):
     try:
         save_visit_to_database(visit_data)
+        return {"logged_visit": True}
     except:
         raise HTTPException(status_code=500, detail="Couldn't register user interaction.")
